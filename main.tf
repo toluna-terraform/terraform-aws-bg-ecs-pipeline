@@ -40,6 +40,7 @@ module "code_deploy" {
   alb_tg_blue_name   = var.alb_tg_blue_name
   alb_tg_green_name  = var.alb_tg_green_name
   ecs_iam_roles_arns = var.ecs_iam_roles_arns
+}
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
  bucket = "s3-${var.env_name}-codepipeline"
