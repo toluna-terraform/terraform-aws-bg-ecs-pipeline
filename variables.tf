@@ -30,6 +30,6 @@ variable "alb_tg_green_name" {
      type = string
  }
 
-variable "ecs_iam_roles" {
+variable "ecs_iam_roles_arns" {
      type = list(string)
  }
