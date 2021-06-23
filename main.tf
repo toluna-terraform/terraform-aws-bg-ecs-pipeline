@@ -1,5 +1,6 @@
 locals{
     source_repository_url = "https://bitbucket.org/${var.source_repository}"    
+    image_uri             = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/${var.ecr_repo_name}"
 }
 
 module "code-pipeline" {
@@ -25,7 +26,7 @@ module "code-build" {
   source_repository_url                 = local.source_repository_url
   environment_variables_parameter_store = var.environment_variables_parameter_store
   environment_variables                 = var.environment_variables
-  buildspec_file                        = var.buildspec_file
+  buildspec_file                        = templatefile("templates/buildspec.yml.tpl", { IMAGE_URI = local.image_uri, DOCKERFILE_PATH = var.dockerfile_path})
 }
 
 

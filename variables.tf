@@ -6,7 +6,7 @@ variable "source_repository" {
     type = string
 }
 
-variable "dockerfile" {
+variable "dockerfile_path" {
     type = string
 } 
 
