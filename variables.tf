@@ -11,22 +11,25 @@ variable "dockerfile" {
 } 
 
  variable "ecs_cluster_name" {
-     type     = string
+     type = string
  }
 
 variable "ecs_service_name" {
-     type     = string
+     type = string
  }
 
 variable "alb_listener_arn" {
-     type     = string
+     type = string
  }
 
 variable "alb_tg_blue_name" {
-     type     = string
+     type = string
  }
 
 variable "alb_tg_green_name" {
-     type     = string
+     type = string
  }
 
+variable "ecs_iam_roles" {
+     type = list(string)
+ }
