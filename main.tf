@@ -30,16 +30,16 @@ module "code-build" {
 
 
 module "code_deploy" {
-  source            = "toluna-terraform/code-deploy/aws"
-  version           = "~>0.0.1"
-  env_name          = var.env_name
-  s3_bucket         = aws_s3_bucket.codepipeline_bucket.bucket
-  ecs_service_name  = var.ecs_service_name
-  ecs_cluster_name  = var.ecs_cluster_name
-  alb_listener_arn  = var.alb_listener_arn
-  alb_tg_blue_name  = var.alb_tg_blue_name
-  alb_tg_green_name = var.alb_tg_green_name
-}
+  source             = "toluna-terraform/code-deploy/aws"
+  version            = "~>0.0.1"
+  env_name           = var.env_name
+  s3_bucket          = aws_s3_bucket.codepipeline_bucket.bucket
+  ecs_service_name   = var.ecs_service_name
+  ecs_cluster_name   = var.ecs_cluster_name
+  alb_listener_arn   = var.alb_listener_arn
+  alb_tg_blue_name   = var.alb_tg_blue_name
+  alb_tg_green_name  = var.alb_tg_green_name
+  ecs_iam_roles_arns = var.ecs_iam_roles_arns
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
  bucket = "s3-${var.env_name}-codepipeline"
