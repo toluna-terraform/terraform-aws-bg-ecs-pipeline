@@ -4,7 +4,7 @@ locals{
 }
 
 resource "local_file" "buildspec" {
-    content  = templatefile("${path.module}/templates/buildspec.yml.tpl", { IMAGE_URI = local.image_uri, DOCKERFILE_PATH = var.dockerfile_path, ADO_USER = data.aws_ssm_parameter.ado_user.value ,ADO_PASSWORD = data.aws_ssm_parameter.ado_password.value})
+    content  = templatefile("${path.module}/templates/buildspec.yml.tpl", { IMAGE_URI = local.image_uri, DOCKERFILE_PATH = var.dockerfile_path, IMAGE_REPO_NAME = var.ecr_repo_name ,ADO_USER = data.aws_ssm_parameter.ado_user.value ,ADO_PASSWORD = data.aws_ssm_parameter.ado_password.value})
     filename = "buildspec.yml"
 }
 
