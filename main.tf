@@ -3,10 +3,6 @@ locals{
     image_uri             = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/${var.ecr_repo_name}:latest"
 }
 
-resource "local_file" "buildspec" {
-    content  = templatefile("${path.module}/templates/buildspec.yml.tpl", { IMAGE_URI = local.image_uri, DOCKERFILE_PATH = var.dockerfile_path, IMAGE_REPO_NAME = var.ecr_repo_name ,ADO_USER = data.aws_ssm_parameter.ado_user.value ,ADO_PASSWORD = data.aws_ssm_parameter.ado_password.value})
-    filename = "buildspec.yml"
-}
 
 module "code-pipeline" {
   #source                   = "toluna-terraform/code-pipeline/aws"
@@ -32,7 +28,7 @@ module "code-build" {
   s3_bucket                             = aws_s3_bucket.codepipeline_bucket.bucket
   privileged_mode                       = true
   environment_variables_parameter_store = var.environment_variables_parameter_store
-  buildspec_file                        = local_file.buildspec.filename
+  buildspec_file                        = templatefile("${path.module}/templates/buildspec.yml.tpl", { IMAGE_URI = local.image_uri, DOCKERFILE_PATH = var.dockerfile_path, IMAGE_REPO_NAME = var.ecr_repo_name ,ADO_USER = data.aws_ssm_parameter.ado_user.value ,ADO_PASSWORD = data.aws_ssm_parameter.ado_password.value})
   depends_on = [
     aws_s3_bucket.codepipeline_bucket,
   ]
