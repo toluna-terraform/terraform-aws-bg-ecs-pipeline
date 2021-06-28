@@ -21,6 +21,7 @@ phases:
       - CODEBUILD_RESOLVED_SOURCE_VERSION="$CODEBUILD_RESOLVED_SOURCE_VERSION"
       - IMAGE_TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)_build_$CODEBUILD_BUILD_NUMBER"
       - IMAGE_URI="${IMAGE_URI}"
+      - IMAGE_REPO_NAME="${IMAGE_REPO_NAME}"
   build:
     commands:
       - echo Build started on `date`
