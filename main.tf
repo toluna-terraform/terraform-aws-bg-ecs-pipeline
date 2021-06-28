@@ -17,7 +17,7 @@ module "code-pipeline" {
   s3_bucket                = aws_s3_bucket.codepipeline_bucket.bucket
   code_build_projects      = ["codebuild-${var.env_name}"]
   code_deploy_applications = ["ecs-${var.env_name}-deploy"]
-  trigger_branch           = "develop"
+  trigger_branch           = var.trigger_branch
   trigger_events           = ["push","merge"]
   depends_on = [
     aws_s3_bucket.codepipeline_bucket,

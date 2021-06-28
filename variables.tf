@@ -8,6 +8,10 @@ variable "source_repository" {
     default = "tolunaengineering/chorus"
 }
 
+variable "trigger_branch" {
+    type     = string
+ }
+
 variable "dockerfile_path" {
     type = string
     default = "service/"
