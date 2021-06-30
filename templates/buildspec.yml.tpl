@@ -5,6 +5,7 @@
 # IMAGE_TAG
 # IMAGE_URI
 # DOCKERFILE_PATH
+# APPSPEC
 
 
 
@@ -37,11 +38,15 @@ phases:
       - printf '[{"name":"%s","imageUri":"%s"}]' "$IMAGE_TAG" "$IMAGE_URI" > $CODEBUILD_SRC_DIR/image_definitions.json
       - aws ecs describe-task-definition --task-definition $IMAGE_REPO_NAME --query "taskDefinition" --output json > $CODEBUILD_SRC_DIR/taskdef.json
       - export var=$(aws ecs describe-task-definition --task-definition $IMAGE_REPO_NAME --query "taskDefinition.taskDefinitionArn" --output text)
-      - sed -i "s+<TASKDEF_ARN>+$var+g" ChorusApi/appspec.yml
-      - sed -i "s+<CONTAINER_NAME>+$IMAGE_REPO_NAME+g" ChorusApi/appspec.yml
+      - echo $APPSPEC > appspec.json
+      - sed -i "s+<TASKDEF_ARN>+$var+g" appspec.json
+      - sed -i "s+<CONTAINER_NAME>+$IMAGE_REPO_NAME+g" appspec.json
+      - more appspec.json
+      - pwd
+      - ls -l
 
 artifacts:
   files:
-    - service/ChorusApi/appspec.yml
+    - service/appspec.json
     - taskdef.json
   discard-paths: yes

@@ -55,7 +55,13 @@ variable "ecs_iam_roles_arns" {
 variable "environment_variables_parameter_store" {
  type = map(string)
  default = {
- "ADO_USER" = "/app/ado_user",
- "ADO_PASSWORD" = "/app/ado_password"
+    "ADO_USER" = "/app/ado_user",
+    "ADO_PASSWORD" = "/app/ado_password"
+ }
+}
+
+variable "environment_variables" {
+ type = map(string)
+ default = {
  }
 }
