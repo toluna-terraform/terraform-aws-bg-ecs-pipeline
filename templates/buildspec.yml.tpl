@@ -31,22 +31,20 @@ phases:
       - docker build -t ${IMAGE_URI} --build-arg ADO_USER=${ADO_USER} --build-arg ADO_PASSWORD=${ADO_PASSWORD} .
   post_build:
     commands:
+      - cd $CODEBUILD_SRC_DIR
       - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
       - echo Build stage successfully completed on `date`
       - echo Pushing the Docker image...
       - docker push $IMAGE_URI
-      - printf '[{"name":"%s","imageUri":"%s"}]' "$IMAGE_TAG" "$IMAGE_URI" > $CODEBUILD_SRC_DIR/image_definitions.json
-      - aws ecs describe-task-definition --task-definition $IMAGE_REPO_NAME --query "taskDefinition" --output json > $CODEBUILD_SRC_DIR/taskdef.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' "$IMAGE_TAG" "$IMAGE_URI" > image_definitions.json
+      - aws ecs describe-task-definition --task-definition $IMAGE_REPO_NAME --query "taskDefinition" --output json > taskdef.json
       - export var=$(aws ecs describe-task-definition --task-definition $IMAGE_REPO_NAME --query "taskDefinition.taskDefinitionArn" --output text)
       - echo $APPSPEC > appspec.json
       - sed -i "s+<TASKDEF_ARN>+$var+g" appspec.json
       - sed -i "s+<CONTAINER_NAME>+$IMAGE_REPO_NAME+g" appspec.json
-      - more appspec.json
-      - pwd
-      - ls -l
 
 artifacts:
   files:
-    - service/appspec.json
+    - appspec.json
     - taskdef.json
   discard-paths: yes
