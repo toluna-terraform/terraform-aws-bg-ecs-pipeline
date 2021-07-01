@@ -13,8 +13,8 @@ module "code-pipeline" {
   env_name                 = var.env_name
   source_repository        = var.source_repository
   s3_bucket                = aws_s3_bucket.codepipeline_bucket.bucket //TODO: consider remove
-  code_build_projects      = ["codebuild-${var.env_name}"] //TODO: can be resolved from code_build project resource
-  code_deploy_applications = ["ecs-${var.env_name}-deploy"] //TODO: can be resolved from code_deploy app resource
+  code_build_projects      = [module.code-build.attributes.name] 
+  code_deploy_applications = [module.code-deploy.attributes.name] 
   trigger_branch           = var.trigger_branch
   trigger_events           = ["push","merge"]
   depends_on = [
@@ -38,7 +38,7 @@ module "code-build" {
 }
 
 
-module "code_deploy" {
+module "code-deploy" {
   #source             = "toluna-terraform/code-deploy/aws"
   #version            = "~>0.0.1"
   source                   = "../terraform-aws-code-deploy"
