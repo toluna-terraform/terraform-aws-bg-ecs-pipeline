@@ -7,7 +7,7 @@ locals {
 
 module "code-pipeline" {
   source  = "toluna-terraform/code-pipeline/aws"
-  version = "~>0.0.5"
+  version = "~>1.0.1"
   #source                   = "../terraform-aws-code-pipeline"
   env_name                 = var.env_name
   source_repository        = var.source_repository
@@ -23,7 +23,7 @@ module "code-pipeline" {
 
 module "code-build" {
   source  = "toluna-terraform/code-build/aws"
-  version = "~>0.0.5"
+  version = "~>1.0.1"
   #source                                = "../terraform-aws-code-build"
   env_name                              = var.env_name
   s3_bucket                             = aws_s3_bucket.codepipeline_bucket.bucket
@@ -39,7 +39,7 @@ module "code-build" {
 
 module "code-deploy" {
   source  = "toluna-terraform/code-deploy/aws"
-  version = "~>0.0.1"
+  version = "~>1.0.1"
   #source                   = "../terraform-aws-code-deploy"
   env_name           = var.env_name
   s3_bucket          = aws_s3_bucket.codepipeline_bucket.bucket
