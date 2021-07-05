@@ -3,6 +3,10 @@ variable "env_name" {
     default = "devops-ecs-pipe"
 }
 
+variable "ecr_repo_url" {
+    type = string 
+}
+
 variable "source_repository" {
     type = string
     default = "tolunaengineering/chorus"
