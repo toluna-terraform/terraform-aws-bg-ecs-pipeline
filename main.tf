@@ -49,6 +49,10 @@ module "code-deploy" {
   alb_tg_blue_name   = var.alb_tg_blue_name
   alb_tg_green_name  = var.alb_tg_green_name
   ecs_iam_roles_arns = var.ecs_iam_roles_arns
+
+  depends_on = [
+    aws_s3_bucket.codepipeline_bucket
+  ]
 }
 
 
