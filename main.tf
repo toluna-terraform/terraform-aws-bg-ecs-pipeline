@@ -53,8 +53,9 @@ module "code-deploy" {
 
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket = "s3-${var.env_name}-codepipeline"
-  acl    = "private"
+  bucket        = "s3-${var.env_name}-codepipeline"
+  acl           = "private"
+  force_destroy = true
   tags = tomap({
     UseWithCodeDeploy = true
     created_by        = "terraform"
