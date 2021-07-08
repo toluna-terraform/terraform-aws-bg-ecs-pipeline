@@ -6,9 +6,9 @@ locals {
 
 
 module "code-pipeline" {
-  source  = "toluna-terraform/code-pipeline/aws"
-  version = "~>1.0.1"
   #source                   = "../terraform-aws-code-pipeline"
+  source                   = "toluna-terraform/code-pipeline/aws"
+  version                  = "~>1.0.1"
   env_name                 = var.env_name
   source_repository        = var.source_repository
   s3_bucket                = aws_s3_bucket.codepipeline_bucket.bucket
@@ -22,9 +22,9 @@ module "code-pipeline" {
 }
 
 module "code-build" {
-  #source  = "toluna-terraform/code-build/aws"
-  #version = "~>1.0.1"
-  source                                = "../terraform-aws-code-build"
+  #source                                = "../terraform-aws-code-build"
+  source                                = "toluna-terraform/code-build/aws"
+  version                               = "~>1.0.1"
   env_name                              = var.env_name
   s3_bucket                             = aws_s3_bucket.codepipeline_bucket.bucket
   privileged_mode                       = true
@@ -38,9 +38,9 @@ module "code-build" {
 
 
 module "code-deploy" {
-  #source  = "toluna-terraform/code-deploy/aws"
-  #version = "~>1.0.1"
-  source                   = "../terraform-aws-code-deploy"
+  #source             = "../terraform-aws-code-deploy"
+  source             = "toluna-terraform/code-deploy/aws"
+  version            = "~>1.0.1"
   env_name           = var.env_name
   s3_bucket          = aws_s3_bucket.codepipeline_bucket.bucket
   ecs_service_name   = var.ecs_service_name
