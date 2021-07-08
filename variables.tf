@@ -1,6 +1,5 @@
 variable "env_name" {
     type = string
-    default = "devops-ecs-pipe"
 }
 
 variable "ecr_repo_url" {
@@ -9,7 +8,6 @@ variable "ecr_repo_url" {
 
 variable "source_repository" {
     type = string
-    default = "tolunaengineering/chorus"
 }
 
 variable "trigger_branch" {
@@ -18,32 +16,26 @@ variable "trigger_branch" {
 
 variable "dockerfile_path" {
     type = string
-    default = "service/"
 } 
 
  variable "ecs_cluster_name" {
      type = string
-     default = "chorus-devops"
  }
 
 variable "ecs_service_name" {
      type = string
-     default = "chorus-devops"
  }
 
 variable "alb_listener_arn" {
      type = string
-     default = "arn:aws:elasticloadbalancing:us-east-1:047763475875:listener/app/chorus-devops/ed1ae8441cfeca71/20496ed7dcadde70"
  }
 
 variable "alb_tg_blue_name" {
      type = string
-     default = "chorus-devops-blue"
  }
 
 variable "alb_tg_green_name" {
      type = string
-     default = "chorus-devops-green"
  }
 
 variable "ecs_iam_roles_arns" {
@@ -53,7 +45,6 @@ variable "ecs_iam_roles_arns" {
 
  variable "ecr_repo_name" {
      type = string
-     default = "chorus-devops"
  }
 
 variable "environment_variables_parameter_store" {
