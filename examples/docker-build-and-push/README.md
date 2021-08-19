@@ -1,8 +1,8 @@
 ## 📁 In this folder you able to find a Buildspec.yml.tpl sample for Docker Build & Push
 
-### Buildspec file
+### 📃 Buildspec file
 This Buildspec.yml.tpl is a template that should be located in your Terraform folder, beside to "pipelines.tf" file.
-The Buildspec configure all the steps that will be executed in your CodedBuild project as part of your Pipeline.
+The Buildspec.yml configure all the steps that will be executed in your CodedBuild project as part of your Pipeline.
 
 ### Variables
 This Buildspec.yml.tpl contains number of variables that will be replaced in the ```terraform apply``` command.
@@ -17,7 +17,7 @@ Additionally, if these are a unique vars without secured strings - you can set t
 | ADO_USER | JenkinsArtifact | SSM parameter /app/ado_user | In use in ```docker build``` command. |
 | ADO_PASSWORD | ****** | SSM parameter /app/ado_password | In use in ```docker build``` command. |
 
-### Additional tests
+### ✍🏼 Edit your Buildspec.yml.tpl
 If you want to add some tests or commands in your Buildspec - you can do it, all you need to do is:
 - Add a line as a Bash command in the file.
 - Apply your changes (```terraform apply```).
