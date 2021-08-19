@@ -2,7 +2,7 @@
 
 ### 📃 Buildspec file
 This Buildspec.yml.tpl is a template that should be located in your Terraform folder, beside to "pipelines.tf" file.
-The Buildspec.yml configure all the steps that will be executed in your CodedBuild project as part of your Pipeline.
+The Buildspec.yml configures all the steps that will be executed in your CodedBuild project as part of your Pipeline.
 
 ### Variables
 This Buildspec.yml.tpl contains number of variables that will be replaced in the ```terraform apply``` command.
