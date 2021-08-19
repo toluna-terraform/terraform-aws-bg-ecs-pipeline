@@ -5,7 +5,7 @@ This Buildspec.yml.tpl is a template that should be located in your Terraform fo
 The Buildspec.yml configures all the steps that will be executed in your CodedBuild project as part of your Pipeline.
 
 ### Variables
-This Buildspec.yml.tpl contains number of variables that will be replaced in the ```terraform apply``` command.
+This Buildspec.yml.tpl contains number of variables that will be replaced during the ```terraform apply``` execution.
 The "Source" column presents the place of the value, if you would like to change the value, go the the source of the var.
 Additionally, if these are a unique vars without secured strings - you can set the values hardcoded as well.
 
