@@ -1,4 +1,4 @@
-## 📁 In this folder you able to find a Buildspec.yml.tpl sample for Docker Build & Push
+## In this folder you able to find a Buildspec.yml.tpl sample for Docker Build & Push
 
 ### 📃 Buildspec file
 This Buildspec.yml.tpl is a template that should be located in your Terraform folder, beside to "pipelines.tf" file.
