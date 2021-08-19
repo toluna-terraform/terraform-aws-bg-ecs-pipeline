@@ -6,7 +6,7 @@ The Buildspec.yml configures all the steps that will be executed in your CodedBu
 
 ### Variables
 This Buildspec.yml.tpl contains number of variables that will be replaced during the ```terraform apply``` execution.
-The "Source" column presents the place of the value, if you would like to change the value, go the the source of the var.
+The "Source" column presents the location of the value assignment, if you would like to change the value, go the the source of the var.
 Additionally, if these are a unique vars without secured strings - you can set the values hardcoded as well.
 
 | Variable  | Value | Source | Usage | 
