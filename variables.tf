@@ -6,6 +6,14 @@ variable "ecr_repo_url" {
     type = string 
 }
 
+variable "ecr_registry_id" {
+    type = string
+}
+
+variable "task_def_name" {
+    type = string
+}
+
 variable "source_repository" {
     type = string
 }

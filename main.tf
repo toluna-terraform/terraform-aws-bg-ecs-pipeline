@@ -1,7 +1,7 @@
 locals {
   source_repository_url = "https://bitbucket.org/${var.source_repository}"
   //TODO: handle image tag - replace "latest" - should be a build parameter and latest by default 
-  image_uri = "${var.ecr_repo_url}:latest"
+  image_uri = "${var.ecr_repo_url}:${var.env_name}"
 }
 
 
@@ -27,7 +27,14 @@ module "code-build" {
   privileged_mode                       = true
   environment_variables_parameter_store = var.environment_variables_parameter_store
   environment_variables                 = merge(var.environment_variables, { APPSPEC = templatefile("${path.module}/templates/appspec.json.tpl", { yoyo = "yo" }) }) //TODO: try to replace with file
-  buildspec_file                        = templatefile("buildspec.yml.tpl", { IMAGE_URI = local.image_uri, DOCKERFILE_PATH = var.dockerfile_path, IMAGE_REPO_NAME = var.ecr_repo_name, ADO_USER = data.aws_ssm_parameter.ado_user.value, ADO_PASSWORD = data.aws_ssm_parameter.ado_password.value })
+  buildspec_file                        = templatefile("buildspec.yml.tpl", 
+  { IMAGE_URI = local.image_uri, 
+    DOCKERFILE_PATH = var.dockerfile_path, 
+    ECR_REPO_URL = var.ecr_repo_url, 
+    ECR_REPO_NAME = var.ecr_repo_name,
+    TASK_DEF_NAME = var.task_def_name, 
+    ADO_USER = data.aws_ssm_parameter.ado_user.value, 
+    ADO_PASSWORD = data.aws_ssm_parameter.ado_password.value })
   depends_on = [
     aws_s3_bucket.codepipeline_bucket,
   ]
