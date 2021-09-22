@@ -68,7 +68,7 @@ resource "aws_codepipeline" "codepipeline" {
         version         = "1"
         configuration = {
           ApplicationName = action.value
-          DeploymentGroupName = "${action.value}-group"
+          DeploymentGroupName = "ecs-deploy-group-${var.env_name}"
           TaskDefinitionTemplateArtifact = "build_output"
           AppSpecTemplateArtifact = "build_output"
           
