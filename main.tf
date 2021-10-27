@@ -35,6 +35,7 @@ module "code-build" {
     TASK_DEF_NAME = var.task_def_name, 
     ADO_USER = data.aws_ssm_parameter.ado_user.value, 
     ADO_PASSWORD = data.aws_ssm_parameter.ado_password.value })
+
   depends_on = [
     aws_s3_bucket.codepipeline_bucket,
   ]
@@ -59,7 +60,7 @@ module "code-deploy" {
 
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket        = "s3-codepipeline-${var.env_name}"
+  bucket        = "s3-codepipeline-${var.app_name}-${var.env_name}"
   acl           = "private"
   force_destroy = true
   tags = tomap({
