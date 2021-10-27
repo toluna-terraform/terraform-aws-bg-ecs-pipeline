@@ -8,6 +8,7 @@ locals {
 module "code-pipeline" {
   source                   = "./modules/codepipeline"
   env_name                 = var.env_name
+  app_name                 = var.app_name
   source_repository        = var.source_repository
   s3_bucket                = aws_s3_bucket.codepipeline_bucket.bucket
   code_build_projects      = [module.code-build.attributes.name]
@@ -22,7 +23,7 @@ module "code-pipeline" {
 module "code-build" {
   source                                = "./modules/codebuild"
   env_name                              = "${var.env_name}"
-  codebuild_name                        = "codebuild-${var.app_name}-${var.env_name}"
+  app_name                              = "${var.app_name}"
   s3_bucket                             = aws_s3_bucket.codepipeline_bucket.bucket
   privileged_mode                       = true
   environment_variables_parameter_store = var.environment_variables_parameter_store
