@@ -1,6 +1,5 @@
 locals {
   source_repository_url = "https://bitbucket.org/${var.source_repository}"
-  repository_name       = split("/", var.source_repository)[1]
   //TODO: handle image tag - replace "latest" - should be a build parameter and latest by default 
   image_uri = "${var.ecr_repo_url}:${var.env_name}"
 }
@@ -61,7 +60,7 @@ module "code-deploy" {
 
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket        = "s3-codepipeline-${local.repository_name}-${var.env_name}"
+  bucket        = "s3-codepipeline-${var.app_name}-${var.env_name}"
   acl           = "private"
   force_destroy = true
   tags = tomap({
