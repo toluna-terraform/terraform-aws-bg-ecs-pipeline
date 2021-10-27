@@ -35,8 +35,8 @@ module "code-build" {
     ECR_REPO_NAME = var.ecr_repo_name,
     TASK_DEF_NAME = var.task_def_name, 
     ADO_USER = data.aws_ssm_parameter.ado_user.value, 
-    ADO_PASSWORD = data.aws_ssm_parameter.ado_password.value 
-    ENV_NAME = var.env_name})
+    ADO_PASSWORD = data.aws_ssm_parameter.ado_password.value })
+
   depends_on = [
     aws_s3_bucket.codepipeline_bucket,
   ]
