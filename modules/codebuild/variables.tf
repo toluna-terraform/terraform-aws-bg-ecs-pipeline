@@ -2,7 +2,7 @@
      type     = string
  }
 
-variable "app_name" {
+variable "codebuild_name" {
     type = string
   
 }

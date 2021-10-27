@@ -1,7 +1,7 @@
 locals {
   repository_name       = split("/", var.source_repository)[1]
-  artifacts_bucket_name = "s3-codepipeline-${local.app_name}-${var.env_name}"
-  codepipeline_name     = "codepipeline-${local.app_name}-${var.env_name}"
+  artifacts_bucket_name = "s3-codepipeline-${local.repository_name}-${var.env_name}"
+  codepipeline_name     = "codepipeline-${local.repository_name}-${var.env_name}"
 }
 
 resource "aws_codepipeline" "codepipeline" {
@@ -68,7 +68,7 @@ resource "aws_codepipeline" "codepipeline" {
         version         = "1"
         configuration = {
           ApplicationName = action.value
-          DeploymentGroupName = "ecs-deploy-group-${var.app_name}-${var.env_name}"
+          DeploymentGroupName = "ecs-deploy-group-${var.env_name}"
           TaskDefinitionTemplateArtifact = "build_output"
           AppSpecTemplateArtifact = "build_output"
           

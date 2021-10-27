@@ -3,7 +3,7 @@ locals{
 }
 
 resource "aws_codedeploy_app" "codedeploy_app" {
-  name = "ecs-deploy-${var.app_name}-${var.env_name}"
+  name = "ecs-deploy-${var.env_name}"
   compute_platform = "ECS"
 }
 
@@ -11,7 +11,7 @@ resource "aws_codedeploy_app" "codedeploy_app" {
 resource "aws_codedeploy_deployment_group" "deployment_group" {
   app_name               = aws_codedeploy_app.codedeploy_app.name
   deployment_config_name = "CodeDeployDefault.ECSAllAtOnce"
-  deployment_group_name  = "ecs-deploy-group-${var.app_name}-${var.env_name}"
+  deployment_group_name  = "ecs-deploy-group-${var.env_name}"
   service_role_arn       = aws_iam_role.codedeploy_role.arn
 
   auto_rollback_configuration {
@@ -59,7 +59,7 @@ resource "aws_codedeploy_deployment_group" "deployment_group" {
 
 
 resource "aws_iam_role" "codedeploy_role" {
-  name = "role-codedeploy-${var.app_name}-${var.env_name}"
+  name = "role-codedeploy-chorus-${var.env_name}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -77,7 +77,7 @@ resource "aws_iam_role" "codedeploy_role" {
 }
 
 resource "aws_iam_role_policy" "cloudWatch_policy" {
-  name = "policy-cloudWatch_policy-${var.app_name}-${var.env_name}"
+  name = "policy-cloudWatch_policy-${var.env_name}"
   role = aws_iam_role.codedeploy_role.id
 
   # Terraform's "jsonencode" function converts a
@@ -99,7 +99,7 @@ resource "aws_iam_role_policy" "cloudWatch_policy" {
 }
 
 resource "aws_iam_role_policy" "ecs_policy" {
-  name = "policy-ecs_policy-${var.app_name}-${var.env_name}"
+  name = "policy-ecs_policy-${var.env_name}"
   role = aws_iam_role.codedeploy_role.id
   policy = data.aws_iam_policy_document.codedeploy_role_policy.json
 }

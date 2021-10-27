@@ -1,5 +1,5 @@
 locals{
-    build_name = "codebuild-${var.app_name}-${var.env_name}" 
+    build_name = "codebuild-${var.codebuild_name}-${var.env_name}" 
 }
 
 
