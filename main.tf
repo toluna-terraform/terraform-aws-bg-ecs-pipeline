@@ -21,8 +21,8 @@ module "code-pipeline" {
 
 module "code-build" {
   source                                = "./modules/codebuild"
-  env_name                              = var.env_name
-  codebuild_name                        = "build"
+  env_name                              = "${var.env_name}"
+  codebuild_name                        = "codebuild-${var.app_name}-${var.env_name}"
   s3_bucket                             = aws_s3_bucket.codepipeline_bucket.bucket
   privileged_mode                       = true
   environment_variables_parameter_store = var.environment_variables_parameter_store
@@ -44,6 +44,7 @@ module "code-build" {
 module "code-deploy" {
   source             = "./modules/codedeploy"
   env_name           = var.env_name
+  app_name           = var.app_name
   s3_bucket          = aws_s3_bucket.codepipeline_bucket.bucket
   ecs_service_name   = var.ecs_service_name
   ecs_cluster_name   = var.ecs_cluster_name
@@ -59,7 +60,7 @@ module "code-deploy" {
 
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket        = "s3-codepipeline-${var.env_name}"
+  bucket        = "s3-codepipeline-${var.app_name}-${var.env_name}"
   acl           = "private"
   force_destroy = true
   tags = tomap({
