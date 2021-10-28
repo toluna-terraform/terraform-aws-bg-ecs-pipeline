@@ -25,3 +25,7 @@ variable "code_deploy_applications" {
 variable "s3_bucket" {
     type = string
 }
+
+variable "app_name" {
+  type = string
+}
