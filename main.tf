@@ -24,6 +24,8 @@ module "code-build" {
   source                                = "./modules/codebuild"
   env_name                              = var.env_name
   codebuild_name                        = "build"
+  source_repository_url                 = local.source_repository_url
+  source_branch                         = var.trigger_branch
   s3_bucket                             = aws_s3_bucket.codepipeline_bucket.bucket
   privileged_mode                       = true
   environment_variables_parameter_store = var.environment_variables_parameter_store
