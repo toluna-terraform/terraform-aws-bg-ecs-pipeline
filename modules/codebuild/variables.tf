@@ -10,19 +10,12 @@ variable "codebuild_name" {
      type     = string
  }
 
- variable "source_repository" {
-     default = "chorus"
-     type     = string
- }
-
 variable "source_repository_url" {
-    default  = "https://bitbucket.org/tolunaengineering/chorus.git"
     type     = string
  }
 
  variable "source_branch" {
      type     = string
-     default = "master"
  }
 
  variable "buildspec_file" {
