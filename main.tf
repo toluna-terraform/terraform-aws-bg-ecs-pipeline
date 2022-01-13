@@ -26,7 +26,7 @@ module "code-build" {
   s3_bucket                             = aws_s3_bucket.codepipeline_bucket.bucket
   privileged_mode                       = true
   environment_variables_parameter_store = var.environment_variables_parameter_store
-  environment_variables                 = merge(var.environment_variables, { APPSPEC = templatefile("${path.module}/templates/appspec.json.tpl", { yoyo = "yo" }) }) //TODO: try to replace with file
+  environment_variables                 = merge(var.environment_variables, { APPSPEC = templatefile("${path.module}/templates/appspec.json.tpl", { ENV_TYPE = var.env_type, APP_NAME = var.app_name }) }) //TODO: try to replace with file
   buildspec_file                        = templatefile("buildspec.yml.tpl", 
   { IMAGE_URI = local.image_uri, 
     DOCKERFILE_PATH = var.dockerfile_path, 
@@ -60,7 +60,7 @@ module "code-deploy" {
 
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket        = "s3-codepipeline-${var.app_name}-${var.env_name}"
+  bucket        = "s3-codepipeline-${var.app_name}-${var.env_name}-test"
   acl           = "private"
   force_destroy = true
   tags = tomap({
