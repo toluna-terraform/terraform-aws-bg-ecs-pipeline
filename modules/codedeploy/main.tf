@@ -69,7 +69,9 @@ resource "aws_iam_role" "codedeploy_role" {
         Effect = "Allow"
         Sid    = ""
         Principal = {
-          Service = "codedeploy.amazonaws.com"
+          Service = ["codedeploy.amazonaws.com",
+                     "lambda.amazonaws.com"
+                     ]
         }
       },
     ]
@@ -89,7 +91,8 @@ resource "aws_iam_role_policy" "cloudWatch_policy" {
         Action = [
             "logs:CreateLogGroup",
             "logs:CreateLogStream",
-            "logs:PutLogEvents"
+            "logs:PutLogEvents",
+            "lambda:*"
         ]
         Effect   = "Allow"
         Resource = "*"
